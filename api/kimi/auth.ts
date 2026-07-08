@@ -1,13 +1,10 @@
 import type { Context } from "hono";
-import { setCookie, deleteCookie } from "hono/cookie";
 import * as jose from "jose";
 import * as cookie from "cookie";
-import { env } from "../lib/env";
-import { getSessionCookieOptions } from "../lib/cookies";
 import { Session } from "@contracts/constants";
 import { Errors } from "@contracts/errors";
-import { supabase, type SupabaseUser } from "./supabase";
-import { findUserBySupabaseId, upsertUser } from "../queries/users";
+import { findUserBySupabaseId } from "../queries/users";
+import type { SupabaseUser } from "./supabase";
 
 // Verify Supabase JWT token from Authorization header
 export async function verifySupabaseToken(
@@ -20,8 +17,6 @@ export async function verifySupabaseToken(
 
   try {
     // Verify the JWT token signature using Supabase's public key
-    const secret = new TextEncoder().encode(env.supabaseServiceKey.split(".")[1] || "");
-    
     // Decode without verification first to get the payload
     const decoded = jose.decodeJwt(token);
     

@@ -67,7 +67,7 @@ export const icpRouter = createRouter({
         const [result] = await db.insert(schema.icpProfiles).values({
           organizationId: orgId,
           ...updateData,
-        }).$returningId();
+        }).returning();
         return { id: result.id, orgId, ...updateData };
       }
     }),
@@ -80,7 +80,7 @@ export const icpRouter = createRouter({
         targetAudience: z.string().optional(),
       })
     )
-    .mutation(async ({ input }) => {
+    .mutation(async () => {
       // Simulated AI generation - in production this would call OpenAI
       const industries = ["Software", "SaaS", "Technology", "Financial Services", "Healthcare"];
       const companySizes = ["10-50", "50-200", "200-1000", "1000-5000"];

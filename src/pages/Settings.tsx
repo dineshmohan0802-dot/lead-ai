@@ -7,7 +7,6 @@ import {
   Shield,
   Key,
   Save,
-  Loader2,
   Check,
 } from "lucide-react";
 

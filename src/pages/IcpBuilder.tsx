@@ -3,7 +3,6 @@ import { trpc } from "@/providers/trpc";
 import {
   Target,
   Sparkles,
-  Plus,
   X,
   Save,
   Loader2,

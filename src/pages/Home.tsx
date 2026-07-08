@@ -8,13 +8,8 @@ import {
   Zap,
   Users,
   BarChart3,
-  ArrowRight,
   Play,
-  Check,
   Sparkles,
-  Target,
-  Search,
-  Shield,
 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -87,6 +82,7 @@ function EnergyStream() {
     }
 
     function resize() {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
@@ -117,6 +113,7 @@ function EnergyStream() {
     }
 
     function updateParticles(time: number) {
+      if (!canvas) return;
       for (const p of particles) {
         p.individualTime += 1;
         const n =
@@ -137,6 +134,7 @@ function EnergyStream() {
     }
 
     function drawEnergyStream(ctx: CanvasRenderingContext2D, time: number) {
+      if (!canvas) return;
       const mx = mouseRef.current.x;
       const my = mouseRef.current.y;
       const cx =
@@ -186,6 +184,7 @@ function EnergyStream() {
 
     let raf: number;
     function animate(timestamp: number) {
+      if (!ctx || !canvas) return;
       ctx.globalCompositeOperation = "source-over";
       ctx.fillStyle = `rgba(10, 14, 26, ${TRAIL_LENGTH})`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);

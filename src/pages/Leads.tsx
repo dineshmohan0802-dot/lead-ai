@@ -249,9 +249,9 @@ export default function Leads() {
                         className="w-4 h-4"
                         style={{
                           color:
-                            lead.sentimentScore > 0
+                            (lead.sentimentScore ?? 0) > 0
                               ? "#10B981"
-                              : lead.sentimentScore < 0
+                              : (lead.sentimentScore ?? 0) < 0
                               ? "#EF4444"
                               : "#8B95A5",
                         }}

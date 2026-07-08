@@ -32,11 +32,14 @@ export async function upsertUser(data: InsertUser) {
   await getDb()
     .insert(schema.users)
     .values(values)
-    .onDuplicateKeyUpdate({ set: updateSet });
+    .onConflictDoUpdate({
+      target: schema.users.supabaseId,
+      set: updateSet,
+    });
 }
 
 // Keep old function for backward compatibility (can be removed later)
-export async function findUserByUnionId(unionId: string) {
+export async function findUserByUnionId(_unionId: string) {
   console.warn(
     "[deprecated] findUserByUnionId is deprecated, use findUserBySupabaseId instead",
   );

@@ -6,7 +6,6 @@ import {
   MessageSquare,
   Twitter,
   Phone,
-  RefreshCw,
   Loader2,
   Copy,
   Check,

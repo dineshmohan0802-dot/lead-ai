@@ -27,9 +27,9 @@ export const leadRouter = createRouter({
       const conditions = [eq(schema.leads.organizationId, filters.orgId)];
 
       if (filters.platform) conditions.push(eq(schema.leads.platform, filters.platform));
-      if (filters.intentType) conditions.push(eq(schema.leads.intentType, filters.intentType));
-      if (filters.sentiment) conditions.push(eq(schema.leads.sentiment, filters.sentiment));
-      if (filters.status) conditions.push(eq(schema.leads.status, filters.status));
+      if (filters.intentType) conditions.push(eq(schema.leads.intentType, filters.intentType as "buying_intent" | "research_intent" | "comparison" | "complaint" | "recommendation" | "job_seeking" | "general"));
+      if (filters.sentiment) conditions.push(eq(schema.leads.sentiment, filters.sentiment as "positive" | "negative" | "neutral" | "frustrated" | "excited" | "curious" | "urgent" | "buying_ready"));
+      if (filters.status) conditions.push(eq(schema.leads.status, filters.status as "new" | "qualified" | "contacted" | "responded" | "converted" | "archived"));
       if (filters.bookmarked !== undefined) conditions.push(eq(schema.leads.isBookmarked, filters.bookmarked));
       if (filters.scoreMin !== undefined) conditions.push(gte(schema.leads.intentScore, filters.scoreMin));
       if (filters.scoreMax !== undefined) conditions.push(lte(schema.leads.intentScore, filters.scoreMax));

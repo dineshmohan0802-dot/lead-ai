@@ -54,7 +54,7 @@ export const organizationRouter = createRouter({
         keywords: JSON.stringify(input.keywords ?? []),
         products: JSON.stringify(input.products ?? []),
         competitors: JSON.stringify(input.competitors ?? []),
-      }).$returningId();
+      }).returning();
 
       const orgId = org.id;
 
@@ -76,7 +76,7 @@ export const organizationRouter = createRouter({
 
   get: authedQuery
     .input(z.object({ slug: z.string() }))
-    .query(async ({ ctx, input }) => {
+    .query(async ({ input }) => {
       const db = getDb();
       const rows = await db
         .select({

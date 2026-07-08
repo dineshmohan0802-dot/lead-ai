@@ -1,10 +1,6 @@
+import { eq } from "drizzle-orm";
 import { getDb } from "../api/queries/connection";
 import * as schema from "./schema";
-
-const platforms = ["reddit", "linkedin", "twitter", "github", "producthunt", "hackernews", "quora"] as const;
-const intentTypes = ["buying_intent", "research_intent", "comparison", "complaint", "recommendation", "job_seeking", "general"] as const;
-const sentiments = ["positive", "negative", "neutral", "frustrated", "excited", "curious", "urgent", "buying_ready"] as const;
-const statuses = ["new", "qualified", "contacted", "responded", "converted", "archived"] as const;
 
 const demoLeads = [
   {
@@ -155,7 +151,7 @@ async function seed() {
       employeeSize: "20-50",
       country: "United States",
       planId: 2,
-    }).$returningId();
+    }).returning();
     orgId = org.id;
 
     await db.insert(schema.subscriptions).values({

@@ -4,10 +4,16 @@ import type { SessionPayload } from "./types";
 
 const JWT_ALG = "HS256";
 
+// Session handling using Supabase JWT - old Kimi session is deprecated
+// This file is kept for backward compatibility only
+
 export async function signSessionToken(
   payload: SessionPayload,
 ): Promise<string> {
-  const secret = new TextEncoder().encode(env.appSecret);
+  // Use Supabase service key for signing (split to get the secret part)
+  const secret = new TextEncoder().encode(
+    env.supabaseServiceKey.split(".")[1] || "dev-secret-key"
+  );
   return new jose.SignJWT(payload)
     .setProtectedHeader({ alg: JWT_ALG })
     .setIssuedAt()
@@ -23,7 +29,9 @@ export async function verifySessionToken(
     return null;
   }
   try {
-    const secret = new TextEncoder().encode(env.appSecret);
+    const secret = new TextEncoder().encode(
+      env.supabaseServiceKey.split(".")[1] || "dev-secret-key"
+    );
     const { payload } = await jose.jwtVerify(token, secret, {
       algorithms: [JWT_ALG],
     });

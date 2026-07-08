@@ -43,7 +43,7 @@ export const outreachRouter = createRouter({
         body: input.body,
         variables: JSON.stringify(input.variables ?? []),
         isDefault: input.isDefault ?? false,
-      }).$returningId();
+      }).returning();
       return { id: result.id, ...input };
     }),
 
@@ -125,7 +125,7 @@ export const outreachRouter = createRouter({
         body,
         aiModel: "gpt-4",
         status: "draft",
-      }).$returningId();
+      }).returning();
 
       return {
         id: result.id,

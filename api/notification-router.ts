@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { eq, desc, and } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 import { createRouter, publicQuery } from "./middleware";
 import { getDb } from "./queries/connection";
 import * as schema from "@db/schema";
@@ -59,7 +59,7 @@ export const notificationRouter = createRouter({
         type: input.type,
         title: input.title,
         message: input.message,
-      }).$returningId();
+      }).returning();
       return { id: result.id, ...input };
     }),
 });

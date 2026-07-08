@@ -23,7 +23,7 @@ export const sourceRouter = createRouter({
         name: z.string(),
         platform: z.string(),
         type: z.enum(["keyword", "competitor", "brand", "account", "subreddit"]),
-        config: z.record(z.unknown()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ input }) => {
@@ -34,7 +34,7 @@ export const sourceRouter = createRouter({
         platform: input.platform,
         type: input.type,
         config: JSON.stringify(input.config ?? {}),
-      }).$returningId();
+      }).returning();
       return { id: result.id, ...input };
     }),
 
@@ -44,7 +44,7 @@ export const sourceRouter = createRouter({
         id: z.number(),
         name: z.string().optional(),
         isActive: z.boolean().optional(),
-        config: z.record(z.unknown()).optional(),
+        config: z.record(z.string(), z.unknown()).optional(),
       })
     )
     .mutation(async ({ input }) => {
