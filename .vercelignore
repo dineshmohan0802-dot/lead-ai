@@ -1,0 +1,24 @@
+# Don't publish backend bundle as static file
+dist/boot.js
+
+# Don't publish source files
+src/
+api/
+contracts/
+db/
+
+# Don't publish config files
+*.toml
+*.config.ts
+*.config.js
+tsconfig*.json
+drizzle.config.ts
+
+# Don't publish documentation
+*.md
+
+# Don't publish development files
+.env
+.env.example
+node_modules/
+.git/
