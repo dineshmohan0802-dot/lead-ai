@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { eq, desc, and, gte, lte, sql, like, or } from "drizzle-orm";
-import { createRouter, publicQuery } from "./middleware";
-import { getDb } from "./queries/connection";
+import { createRouter, publicQuery } from "./middleware.js";
+import { getDb } from "./queries/connection.js";
 import * as schema from "@db/schema";
 
 export const leadRouter = createRouter({

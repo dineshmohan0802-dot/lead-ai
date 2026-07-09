@@ -1,12 +1,12 @@
-import { authRouter } from "./auth-router";
-import { organizationRouter } from "./organization-router";
-import { leadRouter } from "./lead-router";
-import { dashboardRouter } from "./dashboard-router";
-import { icpRouter } from "./icp-router";
-import { outreachRouter } from "./outreach-router";
-import { sourceRouter } from "./source-router";
-import { notificationRouter } from "./notification-router";
-import { createRouter, publicQuery } from "./middleware";
+import { authRouter } from "./auth-router.js";
+import { organizationRouter } from "./organization-router.js";
+import { leadRouter } from "./lead-router.js";
+import { dashboardRouter } from "./dashboard-router.js";
+import { icpRouter } from "./icp-router.js";
+import { outreachRouter } from "./outreach-router.js";
+import { sourceRouter } from "./source-router.js";
+import { notificationRouter } from "./notification-router.js";
+import { createRouter, publicQuery } from "./middleware.js";
 
 export const appRouter = createRouter({
   ping: publicQuery.query(() => ({ ok: true, ts: Date.now() })),

@@ -23,7 +23,10 @@ export default defineConfig({
   },
   envDir: path.resolve(__dirname),
   build: {
+    // Output frontend only to dist/public
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+    // Don't specify minify - use default (esbuild is fine)
+    sourcemap: false,
   },
 });

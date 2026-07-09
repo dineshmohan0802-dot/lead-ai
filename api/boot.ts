@@ -2,11 +2,11 @@ import { Hono } from "hono";
 import { bodyLimit } from "hono/body-limit";
 import type { HttpBindings } from "@hono/node-server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-import { appRouter } from "./router";
-import { createContext } from "./context";
-import { env } from "./lib/env";
-import { createOAuthCallbackHandler } from "./kimi/auth";
-import { Paths } from "@contracts/constants";
+import { appRouter } from "../api/router.js";
+import { createContext } from "../api/context.js";
+import { env } from "../api/lib/env.js";
+import { createOAuthCallbackHandler } from "../api/kimi/auth.js";
+import { Paths } from "../contracts/constants";
 
 const app = new Hono<{ Bindings: HttpBindings }>();
 
@@ -24,9 +24,10 @@ app.all("/api/*", (c) => c.json({ error: "Not Found" }, 404));
 
 export default app;
 
+// For local development with @hono/vite-dev-server
 if (env.isProduction) {
   const { serve } = await import("@hono/node-server");
-  const { serveStaticFiles } = await import("./lib/vite");
+  const { serveStaticFiles } = await import("../api/lib/vite.js");
   serveStaticFiles(app);
 
   const port = parseInt(process.env.PORT || "3000");

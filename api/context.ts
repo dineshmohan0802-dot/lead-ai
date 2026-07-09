@@ -1,6 +1,6 @@
 import type { Context } from "hono";
 import type { User } from "@db/schema";
-import { authenticateRequest } from "./kimi/auth";
+import { authenticateRequest } from "./kimi/auth.js";
 
 export interface TrpcContext {
   c: Context;
